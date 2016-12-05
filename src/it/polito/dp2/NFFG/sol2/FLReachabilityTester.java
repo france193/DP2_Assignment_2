@@ -9,8 +9,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.ws.rs.ProcessingException;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -62,7 +60,7 @@ public class FLReachabilityTester implements ReachabilityTester {
         node.setId("4");
         Property p = new Property();
         p.setName("name");
-        p.setValue("NODO1");
+        p.setValue("NODO3");
         node.getProperty().add(p);
 
         // Send the request (create node) and receive a response automatically

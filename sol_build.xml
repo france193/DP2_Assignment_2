@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="NFFG-SOL2" default="generate-artifacts" basedir=".">
+
+    <!-- In order to haven't undeclared properties -->
+    <import file="./build.xml"/>
+
+    <description>
+        My Script for NFFG Assignment 2 solution
+    </description>
+
+    <property name="schema.dir" location="${lab2.location}/custom"/>
+    <property name="schemaForBinding" value="Neo4J.xsd"/>
+
+    <!-- use a task of the library "org.jvnet.ws.wadl2java.WJCTask" creating a new task type named "wjc" -->
+    <taskdef name="wjc" classname="org.jvnet.ws.wadl2java.WJCTask">
+        <classpath>
+            <!-- where can be find the library and the .jar file -->
+            <fileset dir="${lib.dir}" includes="*.jar"/>
+        </classpath>
+    </taskdef>
+
+    <target name="generate-artifacts">
+        <!-- now we can use the task previous defined -->
+        <echo message="Compiling the descriptions..." />
+        <wjc description="${WADL}"
+             package="it.polito.dp2.NFFG.sol2"
+             autoSchemaPackage="false"
+             target="${gen.dir}">
+            <customizations dir="." includes="binding.xjc"/>
+            <produces dir="${gen.dir}/it/polito/dp2/NFFG/sol2" includes="*.java"/>
+            <depends dir="." includes="build.xml"/>
+        </wjc>
+    </target>
+
+    <!-- for create annotated classes from a xsd schema created by me
+    <target name="generate-artifacts-xml">
+        <exec executable="xjc" failonerror="true" output="xjc_log.txt">
+            <arg line="-d ${gen.dir} -p it.polito.dp2.NFFG.sol2 ${schema.dir}/${schemaForBinding}"/>
+        </exec>
+        <touch file="${schema.dir}/.flagfile"/>
+    </target>
+    -->
+
+    <!-- running: "ant buildClient"
+    generate-artifacts:
+    [echo]  Generating artifacts...
+    [wjc]   Info: Processing: http://2.238.140.10:9090/Neo4JXML/rest/application.wadl
+    [wjc]   Info: Processing: http://2.238.140.10:9090/Neo4JXML/rest/application.wadl/xsd0.xsd
+    [javac] Compiling 11 source files to /Users/FLDeviOS/IdeaProjects/DP2_Assignment_2/build
+    [javac] Note: /Users/FLDeviOS/IdeaProjects/DP2_Assignment_2/gen-src/it/polito/dp2/NFFG/sol2/IP223814010_Neo4JXMLRest.java uses or overrides a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [echo]  Done.
+     -->
+
+</project>

@@ -18,7 +18,7 @@ import com.sun.jersey.api.uri.UriTemplate;
 
 @Generated(value = {
     "wadl|http://2.238.140.10:9090/Neo4JXML/rest/application.wadl"
-}, comments = "wadl2java, http://wadl.java.net", date = "2016-12-05T11:26:31.415+01:00")
+}, comments = "wadl2java, http://wadl.java.net", date = "2016-12-05T15:35:34.784+01:00")
 public class IP223814010_Neo4JXMLRest {
 
     /**

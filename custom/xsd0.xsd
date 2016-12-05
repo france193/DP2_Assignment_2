@@ -1,0 +1,90 @@
+<xs:schema xmlns:tns="http://www.example.org/Neo4J"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           version="1.0"
+           targetNamespace="http://www.example.org/Neo4J">
+
+    <!-- labels -->
+    <xs:element name="labels">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="value" type="xs:string" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- labels -->
+
+    <!-- node -->
+    <xs:element name="node">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="property" type="tns:Property" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="tns:labels" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <!-- node -->
+
+    <!-- nodes -->
+    <xs:element name="nodes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="node" nillable="true" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="property" type="tns:Property" nillable="true" minOccurs="0"
+                                        maxOccurs="unbounded"/>
+                            <xs:element ref="tns:labels" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- nodes -->
+
+    <!-- paths -->
+    <xs:element name="paths">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="path" type="tns:Path" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- paths -->
+
+    <!-- relationship -->
+    <xs:element name="relationship">
+        <xs:complexType>
+            <xs:sequence/>
+            <xs:attribute name="dstNode" type="xs:string" use="required"/>
+            <xs:attribute name="type" type="xs:string" use="required"/>
+            <xs:attribute name="srcNode" type="xs:string"/>
+            <xs:attribute name="id" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <!-- relationship -->
+
+    <!-- Property -->
+    <xs:complexType name="Property">
+        <xs:sequence/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+    </xs:complexType>
+    <!-- Property -->
+
+    <!-- Path -->
+    <xs:complexType name="Path">
+        <xs:sequence>
+            <xs:element name="node" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="relationship" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="dstNode" type="xs:string" use="required"/>
+        <xs:attribute name="srcNode" type="xs:string" use="required"/>
+        <xs:attribute name="length" type="xs:long"/>
+    </xs:complexType>
+    <!-- Path -->
+
+</xs:schema>

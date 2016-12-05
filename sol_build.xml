@@ -27,9 +27,9 @@
              package="it.polito.dp2.NFFG.sol2"
              autoSchemaPackage="false"
              target="${gen.dir}">
-            <customizations dir="." includes="binding.xjc"/>
+            <customizations dir="lab2.location" includes="binding.xjc"/>
             <produces dir="${gen.dir}/it/polito/dp2/NFFG/sol2" includes="*.java"/>
-            <depends dir="." includes="build.xml"/>
+            <depends dir="lab2.location" includes="build.xml"/>
         </wjc>
     </target>
 

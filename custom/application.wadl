@@ -10,6 +10,7 @@
     </grammars>
 
     <resources base="http://2.238.140.10:9090/Neo4JXML/rest/">
+
         <resource path="/resource">
 
             <resource path="/node">
@@ -207,7 +208,9 @@
             </resource>
 
             <resource path="/node/{nodeid}/relationship">
+
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="nodeid" style="template" type="xs:string"/>
+
                 <method id="postRelationship" name="POST">
                     <request>
                         <representation xmlns:ns2="http://www.example.org/Neo4J" element="ns2:relationship"
@@ -218,6 +221,7 @@
                                         mediaType="application/xml"/>
                     </response>
                 </method>
+
                 <method id="apply" name="OPTIONS">
                     <request>
                         <representation mediaType="*/*"/>
@@ -227,6 +231,7 @@
                     </response>
                     <jersey:extended xmlns:jersey="http://jersey.java.net/">true</jersey:extended>
                 </method>
+
                 <method id="apply" name="OPTIONS">
                     <request>
                         <representation mediaType="*/*"/>
@@ -236,6 +241,7 @@
                     </response>
                     <jersey:extended xmlns:jersey="http://jersey.java.net/">true</jersey:extended>
                 </method>
+
                 <method id="apply" name="OPTIONS">
                     <request>
                         <representation mediaType="*/*"/>
@@ -245,6 +251,7 @@
                     </response>
                     <jersey:extended xmlns:jersey="http://jersey.java.net/">true</jersey:extended>
                 </method>
+
             </resource>
 
             <resource path="/relationship">

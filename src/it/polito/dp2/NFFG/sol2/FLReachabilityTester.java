@@ -13,6 +13,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 /**
@@ -55,22 +56,26 @@ public class FLReachabilityTester implements ReachabilityTester {
         // create a webtarget from the baseURL string
         target = client.target(getBaseURI(baseURL));
 
-        // create a new node
-        Node node = new Node();
-        node.setId("4");
-        Property p = new Property();
-        p.setName("name");
-        p.setValue("NODO3");
-        node.getProperty().add(p);
+        Relationship r = new Relationship();
+        r.setType("Link");
+        r.setDstNode("node2");
 
-        // Send the request (create node) and receive a response automatically
-        // translated as a node instance class. Setting a request as "application/xml".
-        Node response = target.path("/node")
-                .request("application/xml")
-                .post(Entity.entity(node, "application/xml"), Node.class);
+        Response response = target.path("node")
+                .path("70")
+                .path("relationship")
+                .request()
+                .accept("application/xml")
+                .post(Entity.entity(r, "application/xml"));
 
-        System.out.println("--- Response of Post received --- \n");
-        System.out.println(" node " + response.getId());
+        System.out.println("--> Creating a relationship: " + response.getStatus());
+
+        if (response.getStatus() == 200) {
+            Relationship rel = (Relationship) response.getEntity();
+            System.out.println("Id: " + rel.getId());
+            System.out.println("Type: " + rel.getType());
+            System.out.println("Src: " + rel.getSrcNode());
+            System.out.println("Dst: " + rel.getDstNode());
+        }
 
         //TODO check if there are some data on the server
         //TODO delete all data on the server

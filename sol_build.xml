@@ -21,7 +21,6 @@
     </taskdef>
 
     <target name="generate-artifacts">
-        <!-- now we can use the task previous defined -->
         <echo message="Compiling the descriptions..." />
         <wjc description="${WADL}"
              package="it.polito.dp2.NFFG.sol2"
@@ -33,8 +32,8 @@
         </wjc>
     </target>
 
-    <!-- for create annotated classes from a xsd schema created by me
-    <target name="generate-artifacts-xml">
+    <!--
+    <target name="generate-artifacts">
         <exec executable="xjc" failonerror="true" output="xjc_log.txt">
             <arg line="-d ${gen.dir} -p it.polito.dp2.NFFG.sol2 ${schema.dir}/${schemaForBinding}"/>
         </exec>

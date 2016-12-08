@@ -20,6 +20,7 @@
         </classpath>
     </taskdef>
 
+    <!--
     <target name="generate-artifacts">
         <echo message="Compiling the descriptions..." />
         <wjc description="${WADL}"
@@ -31,15 +32,14 @@
             <depends dir="." includes="build.xml"/>
         </wjc>
     </target>
+    -->
 
-    <!--
     <target name="generate-artifacts">
         <exec executable="xjc" failonerror="true" output="xjc_log.txt">
             <arg line="-d ${gen.dir} -p it.polito.dp2.NFFG.sol2 ${schema.dir}/${schemaForBinding}"/>
         </exec>
         <touch file="${schema.dir}/.flagfile"/>
     </target>
-    -->
 
     <!-- running: "ant buildClient"
     generate-artifacts:

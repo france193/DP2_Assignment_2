@@ -67,15 +67,15 @@
     </xs:element>
     <!-- relationship -->
 
-    <!-- Property -->
+    <!-- property -->
     <xs:complexType name="Property">
         <xs:sequence/>
         <xs:attribute name="name" type="xs:string" use="required"/>
         <xs:attribute name="value" type="xs:string" use="required"/>
     </xs:complexType>
-    <!-- Property -->
+    <!-- property -->
 
-    <!-- Path -->
+    <!-- path -->
     <xs:complexType name="Path">
         <xs:sequence>
             <xs:element name="node" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
@@ -85,6 +85,6 @@
         <xs:attribute name="srcNode" type="xs:string" use="required"/>
         <xs:attribute name="length" type="xs:long"/>
     </xs:complexType>
-    <!-- Path -->
+    <!-- path -->
 
 </xs:schema>

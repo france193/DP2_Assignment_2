@@ -1,0 +1,11 @@
+parsing a schema...
+compiling a schema...
+it/polito/dp2/NFFG/sol2/Labels.java
+it/polito/dp2/NFFG/sol2/Node.java
+it/polito/dp2/NFFG/sol2/Nodes.java
+it/polito/dp2/NFFG/sol2/ObjectFactory.java
+it/polito/dp2/NFFG/sol2/Path.java
+it/polito/dp2/NFFG/sol2/Paths.java
+it/polito/dp2/NFFG/sol2/Property.java
+it/polito/dp2/NFFG/sol2/Relationship.java
+it/polito/dp2/NFFG/sol2/package-info.java

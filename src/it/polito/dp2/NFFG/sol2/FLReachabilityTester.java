@@ -1,6 +1,5 @@
 package it.polito.dp2.NFFG.sol2;
 
-import it.polito.dp2.NFFG.*;
 import it.polito.dp2.NFFG.lab2.NoGraphException;
 import it.polito.dp2.NFFG.lab2.ReachabilityTester;
 import it.polito.dp2.NFFG.lab2.ServiceException;
@@ -16,13 +15,11 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 /**
- * ant -Dit.polito.dp2.NFFG.lab2.URL="http://2.238.140.10:9090/Neo4JXML/rest" runFuncTest
+ * ant -Dit.polito.dp2.NFFG.lab2.URL="http://2.238.140.10:9090/Neo4JXML/rest" -Dseed="100000" runFuncTest
  */
 
 /**
@@ -37,12 +34,11 @@ public class FLReachabilityTester implements ReachabilityTester {
     private String baseURL;
     private Client client;
     private HashMap<String, Node> myNodes;
-    private NffgVerifier networkServices;
 
     /**
      * Class' constructor
      */
-    public FLReachabilityTester() throws MalformedURLException, URISyntaxException, NffgVerifierException {
+    public FLReachabilityTester() throws MalformedURLException, URISyntaxException {
         // create the basic URL as a String
         baseURL = System.getProperty("it.polito.dp2.NFFG.lab2.URL") + "/resource";
         // create a new client
@@ -52,8 +48,8 @@ public class FLReachabilityTester implements ReachabilityTester {
         // initialize node list
         myNodes = new HashMap<>();
 
-        NffgVerifierFactory factory = NffgVerifierFactory.newInstance();
-        networkServices = factory.newNffgVerifier();
+        //NffgVerifierFactory factory = NffgVerifierFactory.newInstance();
+        //networkServices = factory.newNffgVerifier();
     }
 
     /**
@@ -118,7 +114,8 @@ public class FLReachabilityTester implements ReachabilityTester {
                 .get();
 
         if (response.getStatus() == 200) {
-            List<Nodes.Node> availablesNodes = ((Nodes) response.getEntity()).getNode();
+            Nodes nodes = response.readEntity(Nodes.class);
+            List<Nodes.Node> availablesNodes = nodes.getNode();
             String name = null;
             int size = availablesNodes.size();
 

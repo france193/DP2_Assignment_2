@@ -1,6 +1,7 @@
 package it.polito.dp2.NFFG.sol2;
 
 
+import it.polito.dp2.NFFG.NffgVerifierException;
 import it.polito.dp2.NFFG.lab2.ReachabilityTester;
 import it.polito.dp2.NFFG.lab2.ReachabilityTesterException;
 
@@ -43,12 +44,6 @@ public class ReachabilityTesterFactory extends it.polito.dp2.NFFG.lab2.Reachabil
         }
 
         return myFLReachabilityTester;
-    }
-
-    //toString() implemented for debugging purposes
-    @Override
-    public String toString() {
-        return "This is a custom ReachabilityTesterFactory implementation for the assignment 2.";
     }
 
 }

@@ -1,5 +1,6 @@
 package it.polito.dp2.NFFG.sol2;
 
+import it.polito.dp2.NFFG.*;
 import it.polito.dp2.NFFG.lab2.NoGraphException;
 import it.polito.dp2.NFFG.lab2.ReachabilityTester;
 import it.polito.dp2.NFFG.lab2.ServiceException;
@@ -33,7 +34,9 @@ public class FLReachabilityTester implements ReachabilityTester {
     private WebTarget target;
     private String baseURL;
     private Client client;
-    private HashMap<String, Node> myNodes;
+    private HashMap<String, Node> myNeo4JNodes;
+    private NffgVerifier networkServices;
+    private String nffgName = null;
 
     /**
      * Class' constructor
@@ -46,10 +49,7 @@ public class FLReachabilityTester implements ReachabilityTester {
         // create a global target for all actions from the baseURL string
         target = client.target(getBaseURI(baseURL));
         // initialize node list
-        myNodes = new HashMap<>();
-
-        //NffgVerifierFactory factory = NffgVerifierFactory.newInstance();
-        //networkServices = factory.newNffgVerifier();
+        myNeo4JNodes = new HashMap<>();
     }
 
     /**
@@ -62,12 +62,29 @@ public class FLReachabilityTester implements ReachabilityTester {
      */
     @Override
     public void loadNFFG(String name) throws UnknownNameException, ServiceException {
+        try {
+            NffgVerifierFactory factory = NffgVerifierFactory.newInstance();
 
-        // clean Neo4J DB
-        cleanDB();
+            networkServices = factory.newNffgVerifier();
 
-        //TODO read 1 NFFG from random generator
-        //TODO load NFFG data to server
+            // clean Neo4J DB
+            cleanDB();
+
+            // read required nffg
+            NffgReader nffg = networkServices.getNffg(name);
+
+            if (nffg != null) {
+                nffgName = nffg.getName();
+
+                // load nffg to server
+                for (NodeReader node : nffg.getNodes()) {
+                    createNodeWithProperties(node.getName(), node.getFuncType().value(), nffgName);
+                }
+            }
+        } catch (NffgVerifierException e) {
+            e.printStackTrace();
+            throw new UnknownNameException();
+        }
     }
 
     /**
@@ -83,6 +100,21 @@ public class FLReachabilityTester implements ReachabilityTester {
      */
     @Override
     public boolean testReachability(String srcName, String destName) throws UnknownNameException, ServiceException, NoGraphException {
+
+        // if there isn't a graph loaded
+        if (getAllNodes() == 0) {
+            throw new NoGraphException();
+        }
+
+        // check existence of the two nodes
+        if ( oneOfTheTwoNodesNotExists(srcName, destName) ) {
+            throw new UnknownNameException();
+        }
+
+        if ( checkAvailablePath(srcName, destName) ) {
+            return true;
+        }
+
         return false;
     }
 
@@ -94,7 +126,11 @@ public class FLReachabilityTester implements ReachabilityTester {
      */
     @Override
     public String getCurrentGraphName() {
-        return null;
+        if (nffgName != null) {
+            return nffgName;
+        } else {
+            return null;
+        }
     }
 
     private URI getBaseURI(String url) {
@@ -133,7 +169,7 @@ public class FLReachabilityTester implements ReachabilityTester {
                         p.setValue(name);
                         n.getProperty().add(p);
                     }
-                    myNodes.put(name, n);
+                    myNeo4JNodes.put(name, n);
                 }
                 System.out.println(response.getStatus() + " - OK: retrieved " + size + " nodes from Neo4J DB");
                 return size;
@@ -189,5 +225,17 @@ public class FLReachabilityTester implements ReachabilityTester {
         } else {
             System.out.println("(!-2) Error inserting node into Neo4j DB!");
         }
+    }
+
+    private boolean oneOfTheTwoNodesNotExists(String srcName, String destName) {
+        if (myNeo4JNodes.get(srcName) == null || myNeo4JNodes.get(srcName) == null) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean checkAvailablePath(String srcName, String destName) {
+        //TODO
     }
 }

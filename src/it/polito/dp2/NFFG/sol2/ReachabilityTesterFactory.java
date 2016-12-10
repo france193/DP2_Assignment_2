@@ -32,14 +32,10 @@ public class ReachabilityTesterFactory extends it.polito.dp2.NFFG.lab2.Reachabil
 
         try {
             myFLReachabilityTester = new FLReachabilityTester();
-        } catch (MalformedURLException e) {
-            System.err.println("MalformedURLException Error: " + e.getMessage());
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
-            System.err.println("URISyntaxException Error: " + e.getMessage());
-            e.printStackTrace();
         } catch (NullPointerException e) {
             System.err.println("NullPointerException Error: " + e.getMessage());
+            e.printStackTrace();
+        } catch (NffgVerifierException e) {
             e.printStackTrace();
         }
 

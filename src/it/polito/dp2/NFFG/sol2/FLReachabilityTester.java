@@ -6,9 +6,6 @@ import it.polito.dp2.NFFG.lab2.ReachabilityTester;
 import it.polito.dp2.NFFG.lab2.ServiceException;
 import it.polito.dp2.NFFG.lab2.UnknownNameException;
 
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -17,7 +14,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * ant -Dit.polito.dp2.NFFG.lab2.URL="http://2.238.140.10:9090/Neo4JXML/rest" -Dseed="100000" runFuncTest
@@ -28,8 +24,11 @@ import java.util.List;
  */
 public class FLReachabilityTester implements ReachabilityTester {
 
+    private final boolean VERBOSE = true;
+
     public final String NODES = "nodes";
     public final String NODE = "node";
+    private final String PATHS = "paths";
 
     private WebTarget target;
     private String baseURL;
@@ -41,13 +40,18 @@ public class FLReachabilityTester implements ReachabilityTester {
     /**
      * Class' constructor
      */
-    public FLReachabilityTester() throws MalformedURLException, URISyntaxException {
+    public FLReachabilityTester() throws NffgVerifierException {
+
         // create the basic URL as a String
         baseURL = System.getProperty("it.polito.dp2.NFFG.lab2.URL") + "/resource";
         // create a new client
         client = ClientBuilder.newClient();
         // create a global target for all actions from the baseURL string
         target = client.target(getBaseURI(baseURL));
+
+        NffgVerifierFactory factory = NffgVerifierFactory.newInstance();
+        networkServices = factory.newNffgVerifier();
+
         // initialize node list
         myNeo4JNodes = new HashMap<>();
     }
@@ -62,28 +66,29 @@ public class FLReachabilityTester implements ReachabilityTester {
      */
     @Override
     public void loadNFFG(String name) throws UnknownNameException, ServiceException {
-        try {
-            NffgVerifierFactory factory = NffgVerifierFactory.newInstance();
+        // clean Neo4J DB
+        deleteAllNodes();
 
-            networkServices = factory.newNffgVerifier();
+        if (name == null) {
+            throw new ServiceException();
+        }
 
-            // clean Neo4J DB
-            cleanDB();
+        // read required nffg
+        NffgReader nffg = networkServices.getNffg(name);
 
-            // read required nffg
-            NffgReader nffg = networkServices.getNffg(name);
-
-            if (nffg != null) {
-                nffgName = nffg.getName();
-
-                // load nffg to server
-                for (NodeReader node : nffg.getNodes()) {
-                    createNodeWithProperties(node.getName(), node.getFuncType().value(), nffgName);
-                }
-            }
-        } catch (NffgVerifierException e) {
-            e.printStackTrace();
+        if (nffg == null) {
             throw new UnknownNameException();
+        }
+
+        nffgName = nffg.getName();
+
+        if (nffgName == null) {
+            throw new ServiceException();
+        }
+
+        // load nffg to server
+        for (NodeReader node : nffg.getNodes()) {
+            createNodeWithProperties(node.getName());
         }
     }
 
@@ -101,21 +106,19 @@ public class FLReachabilityTester implements ReachabilityTester {
     @Override
     public boolean testReachability(String srcName, String destName) throws UnknownNameException, ServiceException, NoGraphException {
 
-        // if there isn't a graph loaded
-        if (getAllNodes() == 0) {
-            throw new NoGraphException();
-        }
-
         // check existence of the two nodes
-        if ( oneOfTheTwoNodesNotExists(srcName, destName) ) {
+        if (cantFindOneOfTheTwoNodes(srcName, destName)) {
+            System.out.println("(e) - UnknownNameException");
             throw new UnknownNameException();
         }
 
-        if ( checkAvailablePath(srcName, destName) ) {
-            return true;
+        // if there isn't a graph loaded
+        if (myNeo4JNodes.size() == 0) {
+            System.out.println("(e) - NoGraphException");
+            throw new NoGraphException();
         }
 
-        return false;
+        return pathExists(srcName, destName);
     }
 
     /**
@@ -128,73 +131,31 @@ public class FLReachabilityTester implements ReachabilityTester {
     public String getCurrentGraphName() {
         if (nffgName != null) {
             return nffgName;
-        } else {
-            return null;
         }
+        return null;
     }
 
     private URI getBaseURI(String url) {
         return UriBuilder.fromUri(url).build();
     }
 
-    private void cleanDB() {
-        if (getAllNodes() > 0) {
-            deleteAllNodes();
-        }
-    }
-
-    private int getAllNodes() {
-        Response response = target.path(NODES)
-                .request()
-                .accept("application/xml")
-                .get();
-
-        if (response.getStatus() == 200) {
-            Nodes nodes = response.readEntity(Nodes.class);
-            List<Nodes.Node> availablesNodes = nodes.getNode();
-            String name = null;
-            int size = availablesNodes.size();
-
-            if (size == 0) {
-                System.out.println(response.getStatus() + " - OK: retrieved " + size + " nodes from Neo4J DB");
-                return 0;
-            } else {
-                for (Nodes.Node node : availablesNodes) {
-                    Node n = new Node();
-                    n.setId(node.getId());
-                    for (Property property : node.getProperty()) {
-                        name = property.getValue();
-                        Property p = new Property();
-                        p.setName(property.getName());
-                        p.setValue(name);
-                        n.getProperty().add(p);
-                    }
-                    myNeo4JNodes.put(name, n);
-                }
-                System.out.println(response.getStatus() + " - OK: retrieved " + size + " nodes from Neo4J DB");
-                return size;
-            }
-
-        } else {
-            System.out.println("(!-0) Error getting nodes from Neo4j DB!");
-            return 0;
-        }
-    }
-
-    private void deleteAllNodes() {
+    private void deleteAllNodes() throws ServiceException {
         Response response = target.path(NODES)
                 .request()
                 .accept("application/xml")
                 .delete();
 
         if (response.getStatus() == 200) {
-            System.out.println(response.getStatus() + " - OK: All nodes deleted!");
+            if (VERBOSE) {
+                System.out.println(response.getStatus() + " - OK: All nodes DELETED!");
+            }
         } else {
             System.out.println("(!-1) Error deleting nodes from Neo4j DB!");
+            throw new ServiceException();
         }
     }
 
-    private void createNodeWithProperties(String nodeName, String nodeType, String nffgName) {
+    private void createNodeWithProperties(String nodeName) throws ServiceException {
         // create a new node
         Node node = new Node();
 
@@ -203,39 +164,69 @@ public class FLReachabilityTester implements ReachabilityTester {
         p.setValue(nodeName);
         node.getProperty().add(p);
 
-        Property p1 = new Property();
-        p1.setName("nodeType");
-        p1.setValue(nodeType);
-        node.getProperty().add(p1);
-
-        Property p2 = new Property();
-        p2.setName("nffgName");
-        p2.setValue(nffgName);
-        node.getProperty().add(p2);
-
         Response response = target.path(NODE)
                 .request()
                 .accept("application/xml")
                 .post(Entity.entity(node, "application/xml"));
 
-        System.out.println("--> Inserting node: " + response.getStatus());
-
         if (response.getStatus() == 200) {
-            System.out.println(response.getStatus() + " - OK: Node correctly inserted into Neo4J DB");
+            int status = response.getStatus();
+            node.setId(response.readEntity(Node.class).getId());
+
+            if (VERBOSE) {
+                System.out.println(status + " - OK: Node " +
+                        node.getId() +
+                        " " +
+                        p.getValue() +
+                        " UPLOADED");
+            }
+
+            myNeo4JNodes.put(p.getValue(), node);
         } else {
-            System.out.println("(!-2) Error inserting node into Neo4j DB!");
+            System.out.println("(!-2) Error uploading node into Neo4j DB!");
+            throw new ServiceException();
         }
     }
 
-    private boolean oneOfTheTwoNodesNotExists(String srcName, String destName) {
-        if (myNeo4JNodes.get(srcName) == null || myNeo4JNodes.get(srcName) == null) {
+    private boolean cantFindOneOfTheTwoNodes(String srcName, String destName) {
+        if (myNeo4JNodes.get(srcName) == null || myNeo4JNodes.get(destName) == null) {
             return true;
         }
-
         return false;
     }
 
-    private boolean checkAvailablePath(String srcName, String destName) {
-        //TODO
+    private boolean pathExists(String srcName, String destName) throws ServiceException {
+        Boolean res;
+
+        Response response = target.path(NODE)
+                .path(myNeo4JNodes.get(srcName).getId())
+                .path(PATHS)
+                .queryParam("dst", myNeo4JNodes.get(destName).getId())
+                .request()
+                .accept("application/xml")
+                .get();
+
+        if (response.getStatus() == 200) {
+            Paths paths = response.readEntity(Paths.class);
+
+            if (paths.getPath().size() != 0) {
+                if (VERBOSE) {
+                    System.out.println(response.getStatus() + " - OK: A path EXISTS!");
+                }
+                res = true;
+            } else {
+                if (VERBOSE) {
+                    System.out.println(response.getStatus() + " - OK: A path NOT EXISTS!");
+                }
+                res = false;
+            }
+
+        } else {
+            System.out.println("(!-3) Error retrieving paths from Neo4J DB");
+            System.exit(3);
+            throw new ServiceException();
+        }
+
+        return res;
     }
 }

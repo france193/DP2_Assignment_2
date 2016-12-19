@@ -17,15 +17,16 @@
     <property name="test.class" value="it.polito.dp2.NFFG.lab2.tests.NFFGTests"/>
 
     <!-- The location of the ... web service -->
-    <!--
     <property name="PORT" value="8080"/>
     <property name="URL" value="http://localhost:${PORT}/Neo4JXML/rest"/>
     <property name="WADL" value="${URL}/application.wadl"/>
-    -->
+
     <!-- Change to use localhost or remote server -->
+    <!--
     <property name="PORT" value="9090"/>
     <property name="URL" value="http://2.238.140.10:${PORT}/Neo4JXML/rest"/>
     <property name="WADL" value="${URL}/application.wadl"/>
+    -->
 
     <property name="lab2.location" location="."/>
 

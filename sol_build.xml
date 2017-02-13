@@ -2,54 +2,39 @@
 
 <project name="NFFG-SOL2" default="generate-artifacts" basedir=".">
 
-    <!-- In order to haven't undeclared properties -->
-    <import file="./build.xml"/>
+	<description>
+		My Script for NFFG Assignment 2 solution
+	</description>
 
-    <description>
-        My Script for NFFG Assignment 2 solution
-    </description>
+	<property name="generated_wadl"
+		location="${basedir}/src/it/polito/dp2/NFFG/sol2/generated_from_wadl/" />
 
-    <property name="schema.dir" location="${lab2.location}/custom"/>
-    <property name="schemaForBinding" value="Neo4J.xsd"/>
+	<!-- use a task of the library "org.jvnet.ws.wadl2java.WJCTask" creating 
+		a new task type named "wjc" -->
+	<taskdef name="wjc" classname="org.jvnet.ws.wadl2java.WJCTask">
+		<classpath>
+			<!-- where can be find the library and the .jar file -->
+			<fileset dir="${lib.dir}" includes="*.jar" />
+		</classpath>
+	</taskdef>
 
-    <!-- use a task of the library "org.jvnet.ws.wadl2java.WJCTask" creating a new task type named "wjc" -->
-    <taskdef name="wjc" classname="org.jvnet.ws.wadl2java.WJCTask">
-        <classpath>
-            <!-- where can be find the library and the .jar file -->
-            <fileset dir="${lib.dir}" includes="*.jar"/>
-        </classpath>
-    </taskdef>
+	<target name="clean">
+		<delete dir="${generated_wadl}" />
+	</target>
 
-    <!--
-        <target name="generate-artifacts">
-            <echo message="Compiling the descriptions..." />
-            <wjc description="${WADL}"
-                 package="it.polito.dp2.NFFG.sol2"
-                 autoSchemaPackage="false"
-                 target="${gen.dir}">
-                <customizations dir="." includes="binding.xjc"/>
-                <produces dir="${gen.dir}/it/polito/dp2/NFFG/sol2" includes="*.java"/>
-                <depends dir="." includes="build.xml"/>
-            </wjc>
-        </target>
-    -->
-
-    <target name="generate-artifacts">
-        <exec executable="xjc" failonerror="true" output="xjc_log.txt">
-            <arg line="-d ${gen.dir} -p it.polito.dp2.NFFG.sol2 ${schema.dir}/${schemaForBinding}"/>
-        </exec>
-        <touch file="${schema.dir}/.flagfile"/>
-    </target>
-
-    <!-- running: "ant buildClient"
-        generate-artifacts:
-        [echo]  Generating artifacts...
-        [wjc]   Info: Processing: http://2.238.140.10:9090/Neo4JXML/rest/application.wadl
-        [wjc]   Info: Processing: http://2.238.140.10:9090/Neo4JXML/rest/application.wadl/xsd0.xsd
-        [javac] Compiling 11 source files to /Users/FLDeviOS/IdeaProjects/DP2_Assignment_2/build
-        [javac] Note: /Users/FLDeviOS/IdeaProjects/DP2_Assignment_2/gen-src/it/polito/dp2/NFFG/sol2/IP223814010_Neo4JXMLRest.java uses or overrides a deprecated API.
-        [javac] Note: Recompile with -Xlint:deprecation for details.
-        [echo]  Done.
-     -->
+	<target name="init" depends="clean">
+		<mkdir dir="${generated_wadl}" />
+	</target>
+	
+	<target name="generate-artifacts" depends="init">
+		<echo message=" > Generating annotated classes from the wadl of Neo4jXML..." />
+		<wjc description="${WADL}" package="it.polito.dp2.NFFG.sol2.generated_from_wadl"
+			autoSchemaPackage="false" target="${src.dir}">
+			<customizations dir="." includes="binding.xjc" />
+			<produces dir="${src.dir}/it/polito/dp2/NFFG/sol2/generated_from_wadl/" includes="*.java" />
+			<depends dir="." includes="build.xml" />
+		</wjc>
+		<echo message=" > Done" />
+	</target>
 
 </project>

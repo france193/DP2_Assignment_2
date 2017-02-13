@@ -1,0 +1,57 @@
+Buildfile: /Users/FLDeviOS/Documents/workspace_2016_2017/DP2_Assignment_2/build.xml
+
+setseed:
+
+runFuncTest:
+
+init:
+
+buildClient:
+     [echo] Building the submitted solution (if needed)...
+
+clean:
+   [delete] Deleting directory /Users/FLDeviOS/Documents/workspace_2016_2017/DP2_Assignment_2/src/it/polito/dp2/NFFG/sol2/generated_from_wadl
+
+init:
+    [mkdir] Created dir: /Users/FLDeviOS/Documents/workspace_2016_2017/DP2_Assignment_2/src/it/polito/dp2/NFFG/sol2/generated_from_wadl
+
+generate-artifacts:
+     [echo]  > Generating annotated classes from the wadl of Neo4jXML...
+      [wjc] Info: Processing: http://localhost:8080/Neo4JXML/rest/application.wadl
+      [wjc] Info: Processing: http://localhost:8080/Neo4JXML/rest/application.wadl/xsd0.xsd
+     [echo]  > Done
+    [javac] Compiling 11 source files to /Users/FLDeviOS/Documents/workspace_2016_2017/DP2_Assignment_2/build
+    [javac] Note: /Users/FLDeviOS/Documents/workspace_2016_2017/DP2_Assignment_2/src/it/polito/dp2/NFFG/sol2/generated_from_wadl/Localhost_Neo4JXMLRest.java uses or overrides a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+     [echo] Done.
+
+setseed:
+
+runFuncTest.real:
+    [junit] Running it.polito.dp2.NFFG.lab2.tests.NFFGTests
+    [junit] Testsuite: it.polito.dp2.NFFG.lab2.tests.NFFGTests
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.907 sec
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.907 sec
+    [junit] 
+    [junit] ------------- Standard Output ---------------
+    [junit] Random NffgVerifier: Using seed: 191441
+    [junit] Random NffgVerifier: Test case: 0
+    [junit] DEBUG: referenceNFFGName: Nffg0
+    [junit] DEBUG: referenceNFFGNodeSize: 16
+    [junit] DEBUG: starting testload
+    [junit] Random NffgVerifier: Using seed: 191441
+    [junit] Random NffgVerifier: Test case: 0
+    [junit] DEBUG: starting testReachability
+    [junit] Random NffgVerifier: Using seed: 191441
+    [junit] Random NffgVerifier: Test case: 0
+    [junit] DEBUG: starting testWrongReachability
+    [junit] Random NffgVerifier: Using seed: 191441
+    [junit] Random NffgVerifier: Test case: 0
+    [junit] DEBUG: starting testWrongLoad
+    [junit] Random NffgVerifier: Using seed: 191441
+    [junit] Random NffgVerifier: Test case: 0
+    [junit] ------------- ---------------- ---------------
+     [echo] *** All Tests PASSED  ***
+
+BUILD SUCCESSFUL
+Total time: 7 seconds

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-COUNTER=200
+COUNTER=250
 
-while [  $COUNTER -lt 250 ]; do
+while [  $COUNTER -lt 350 ]; do
   echo " > Doing the $COUNTER execution..."
 
   time="$(date +%H%M%S)"

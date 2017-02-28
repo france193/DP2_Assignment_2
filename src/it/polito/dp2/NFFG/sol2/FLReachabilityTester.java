@@ -1,30 +1,20 @@
 package it.polito.dp2.NFFG.sol2;
 
-import java.net.URI;
-import java.util.HashMap;
+import it.polito.dp2.NFFG.*;
+import it.polito.dp2.NFFG.lab2.*;
+import it.polito.dp2.NFFG.sol2.generated_from_wadl.Node;
+import it.polito.dp2.NFFG.sol2.generated_from_wadl.Paths;
+import it.polito.dp2.NFFG.sol2.generated_from_wadl.Property;
+import it.polito.dp2.NFFG.sol2.generated_from_wadl.Relationship;
 
+import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.client.Client;
-
-import it.polito.dp2.NFFG.LinkReader;
-import it.polito.dp2.NFFG.NffgReader;
-import it.polito.dp2.NFFG.NffgVerifier;
-import it.polito.dp2.NFFG.NffgVerifierException;
-import it.polito.dp2.NFFG.NffgVerifierFactory;
-import it.polito.dp2.NFFG.NodeReader;
-import it.polito.dp2.NFFG.lab2.NoGraphException;
-import it.polito.dp2.NFFG.lab2.ReachabilityTester;
-import it.polito.dp2.NFFG.lab2.ReachabilityTesterException;
-import it.polito.dp2.NFFG.lab2.ServiceException;
-import it.polito.dp2.NFFG.lab2.UnknownNameException;
-import it.polito.dp2.NFFG.sol2.generated_from_wadl.Node;
-import it.polito.dp2.NFFG.sol2.generated_from_wadl.Paths;
-import it.polito.dp2.NFFG.sol2.generated_from_wadl.Property;
-import it.polito.dp2.NFFG.sol2.generated_from_wadl.Relationship;
+import java.net.URI;
+import java.util.HashMap;
 
 /**
  * Created by Francesco Longo(223428) 11/02/2017
@@ -46,7 +36,14 @@ public class FLReachabilityTester implements ReachabilityTester {
      */
     public FLReachabilityTester() throws ReachabilityTesterException {
         // create the basic URL as a String
-        baseURL = System.getProperty("it.polito.dp2.NFFG.lab2.URL") + "/resource";
+        baseURL = System.getProperty("it.polito.dp2.NFFG.lab2.URL");
+
+        if (baseURL == null) {
+            throw new ReachabilityTesterException("Property not setted!");
+        }
+
+        baseURL = baseURL + "/resource";
+
         // create a new client
         client = ClientBuilder.newClient();
         // create a global target for all actions from the baseURL string
@@ -67,15 +64,12 @@ public class FLReachabilityTester implements ReachabilityTester {
      * Loads the NFFG with the given name into the remote service. Any
      * previously loaded graph has to be overwritten by this one.
      *
-     * @param name
-     *            the name of the NFFG to be loaded
-     * @throws UnknownNameException
-     *             if the name passed as argument does not correspond to a known
-     *             NFFG. No alteration of data on the server occurs in this
-     *             case.
-     * @throws ServiceException
-     *             if any other error occurs when trying to upload the NFFG. The
-     *             load operation may have been executed partially in this case.
+     * @param name the name of the NFFG to be loaded
+     * @throws UnknownNameException if the name passed as argument does not correspond to a known
+     *                              NFFG. No alteration of data on the server occurs in this
+     *                              case.
+     * @throws ServiceException     if any other error occurs when trying to upload the NFFG. The
+     *                              load operation may have been executed partially in this case.
      */
     @Override
     public void loadNFFG(String name) throws UnknownNameException, ServiceException {
@@ -108,19 +102,14 @@ public class FLReachabilityTester implements ReachabilityTester {
      * Tests reachability from a source node to a destination node in the
      * previously uploaded graph by means of the remote service.
      *
-     * @param srcName
-     *            the name of the source node
-     * @param destName
-     *            the name of the destination node
+     * @param srcName  the name of the source node
+     * @param destName the name of the destination node
      * @return true if the destination node is reachable from the source node,
-     *         false otherwise
-     * @throws UnknownNameException
-     *             if at least one of the names passed as arguments does not
-     *             correspond to a node existing in the loaded graph
-     * @throws NoGraphException
-     *             if no graph is currently loaded
-     * @throws ServiceException
-     *             if any other error occurs when trying to test reachability
+     * false otherwise
+     * @throws UnknownNameException if at least one of the names passed as arguments does not
+     *                              correspond to a node existing in the loaded graph
+     * @throws NoGraphException     if no graph is currently loaded
+     * @throws ServiceException     if any other error occurs when trying to test reachability
      */
     @Override
     public boolean testReachability(String srcName, String destName)
@@ -145,9 +134,9 @@ public class FLReachabilityTester implements ReachabilityTester {
      * Gets the name of the currently loaded graph
      *
      * @return the name of the currently loaded graph or null if no graph is
-     *         currently loaded (includes the case of failure of the last
-     *         attempt to load a graph). This is a local operation that cannot
-     *         fail.
+     * currently loaded (includes the case of failure of the last
+     * attempt to load a graph). This is a local operation that cannot
+     * fail.
      */
     @Override
     public String getCurrentGraphName() {

@@ -18,7 +18,7 @@ import com.sun.jersey.api.uri.UriTemplate;
 
 @Generated(value = {
     "wadl|http://localhost:8080/Neo4JXML/rest/application.wadl"
-}, comments = "wadl2java, http://wadl.java.net", date = "2017-02-13T10:54:29.353+01:00")
+}, comments = "wadl2java, http://wadl.java.net", date = "2017-02-28T16:35:36.861+01:00")
 public class Localhost_Neo4JXMLRest {
 
     /**
@@ -126,6 +126,10 @@ public class Localhost_Neo4JXMLRest {
             return new Localhost_Neo4JXMLRest.Resource.NodeNodeidPaths(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), nodeid);
         }
 
+        public Localhost_Neo4JXMLRest.Resource.Node node() {
+            return new Localhost_Neo4JXMLRest.Resource.Node(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        }
+
         public Localhost_Neo4JXMLRest.Resource.NodeNodeId2 nodeNodeId2(String nodeid) {
             return new Localhost_Neo4JXMLRest.Resource.NodeNodeId2(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), nodeid);
         }
@@ -152,10 +156,6 @@ public class Localhost_Neo4JXMLRest {
 
         public Localhost_Neo4JXMLRest.Resource.Nodes nodes() {
             return new Localhost_Neo4JXMLRest.Resource.Nodes(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
-        }
-
-        public Localhost_Neo4JXMLRest.Resource.Node node() {
-            return new Localhost_Neo4JXMLRest.Resource.Node(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
         public static class Node {

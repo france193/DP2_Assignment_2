@@ -18,13 +18,13 @@ public class ReachabilityTesterFactory extends it.polito.dp2.NFFG.lab2.Reachabil
      * Creates a new instance of a {@link ReachabilityTester} implementation.
      *
      * @return a new instance of a {@link ReachabilityTester} implementation.
-     * @throws ReachabilityTesterException
-     *             if an implementation of {@link ReachabilityTester} cannot be
-     *             created.
+     * @throws ReachabilityTesterException if an implementation of {@link ReachabilityTester} cannot be
+     *                                     created.
      */
     @Override
     public ReachabilityTester newReachabilityTester() throws ReachabilityTesterException {
         FLReachabilityTester myFLReachabilityTester = new FLReachabilityTester();
         return myFLReachabilityTester;
     }
+
 }

@@ -1,13 +1,6 @@
 
 package it.polito.dp2.NFFG.sol2.generated_from_wadl;
 
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Generated;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -16,14 +9,21 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.uri.UriTemplate;
 
+import javax.annotation.Generated;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
+
 @Generated(value = {
-    "wadl|http://localhost:8080/Neo4JXML/rest/application.wadl"
+        "wadl|http://localhost:8080/Neo4JXML/rest/application.wadl"
 }, comments = "wadl2java, http://wadl.java.net", date = "2017-02-28T16:35:36.861+01:00")
 public class Localhost_Neo4JXMLRest {
 
     /**
      * The base URI for the resource represented by this proxy
-     * 
      */
     public final static URI BASE_URI;
 
@@ -33,22 +33,20 @@ public class Localhost_Neo4JXMLRest {
         // of META-INF/java-rs-catalog.xml file, assuming it will be in the
         // oasis:name:tc:entity:xmlns:xml:catalog namespace or similar duck type
         java.io.InputStream is = Localhost_Neo4JXMLRest.class.getResourceAsStream("/META-INF/jax-rs-catalog.xml");
-        if (is!=null) {
+        if (is != null) {
             try {
                 // Ignore the namespace in the catalog, can't use wildcard until
                 // we are sure we have XPath 2.0
                 String found = javax.xml.xpath.XPathFactory.newInstance().newXPath().evaluate(
-                    "/*[name(.) = 'catalog']/*[name(.) = 'uri' and @name ='" + originalURI +"']/@uri", 
-                    new org.xml.sax.InputSource(is)); 
-                if (found!=null && found.length()>0) {
+                        "/*[name(.) = 'catalog']/*[name(.) = 'uri' and @name ='" + originalURI + "']/@uri",
+                        new org.xml.sax.InputSource(is));
+                if (found != null && found.length() > 0) {
                     originalURI = java.net.URI.create(found);
                 }
-                
-            }
-            catch (Exception ex) {
+
+            } catch (Exception ex) {
                 ex.printStackTrace();
-            }
-            finally {
+            } finally {
                 try {
                     is.close();
                 } catch (java.io.IOException e) {
@@ -64,14 +62,12 @@ public class Localhost_Neo4JXMLRest {
 
     /**
      * Template method to allow tooling to customize the new Client
-     * 
      */
     private static void customizeClientConfiguration(ClientConfig cc) {
     }
 
     /**
      * Template method to allow tooling to override Client factory
-     * 
      */
     private static Client createClientInstance(ClientConfig cc) {
         return Client.create(cc);
@@ -79,7 +75,6 @@ public class Localhost_Neo4JXMLRest {
 
     /**
      * Create a new Client instance
-     * 
      */
     public static Client createClient() {
         ClientConfig cc = new DefaultClientConfig();
@@ -109,7 +104,6 @@ public class Localhost_Neo4JXMLRest {
 
         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
-         * 
          */
         public Resource(Client client, URI baseUri) {
             _client = client;
@@ -172,7 +166,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
-             * 
              */
             public Node(Client client, URI baseUri) {
                 _client = client;
@@ -189,13 +182,13 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.type("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("POST", ClientResponse.class, input);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(it.polito.dp2.NFFG.sol2.generated_from_wadl.Node.class);
             }
 
-            public<T >T postXml(Object input, GenericType<T> returnType) {
+            public <T> T postXml(Object input, GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -203,13 +196,13 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.type("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("POST", ClientResponse.class, input);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T postXml(Object input, Class<T> returnType) {
+            public <T> T postXml(Object input, Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -218,7 +211,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("POST", ClientResponse.class, input);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -229,20 +222,20 @@ public class Localhost_Neo4JXMLRest {
                 }
             }
 
-            public<T >T optionsAsXml(GenericType<T> returnType) {
+            public <T> T optionsAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T optionsAsXml(Class<T> returnType) {
+            public <T> T optionsAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -250,7 +243,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -277,7 +270,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
-             * 
              */
             public NodeNodeid(Client client, URI baseUri, String nodeid) {
                 _client = client;
@@ -289,12 +281,11 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
              */
             public NodeNodeid(Client client, URI uri) {
                 _client = client;
                 StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
+                if (template.charAt((template.length() - 1)) != '/') {
                     template.append("/resource/node/{nodeid}");
                 } else {
                     template.append("resource/node/{nodeid}");
@@ -309,7 +300,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Get nodeid
-             * 
              */
             public String getNodeid() {
                 return ((String) _templateAndMatrixParameterValues.get("nodeid"));
@@ -317,7 +307,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Duplicate state and set nodeid
-             * 
              */
             public Localhost_Neo4JXMLRest.Resource.NodeNodeid setNodeid(String nodeid) {
                 Map<String, Object> copyMap;
@@ -334,26 +323,26 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(it.polito.dp2.NFFG.sol2.generated_from_wadl.Node.class);
             }
 
-            public<T >T getAsXml(GenericType<T> returnType) {
+            public <T> T getAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T getAsXml(Class<T> returnType) {
+            public <T> T getAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -361,7 +350,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -372,20 +361,20 @@ public class Localhost_Neo4JXMLRest {
                 }
             }
 
-            public<T >T deleteAsXml(GenericType<T> returnType) {
+            public <T> T deleteAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("DELETE", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T deleteAsXml(Class<T> returnType) {
+            public <T> T deleteAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -393,7 +382,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("DELETE", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -420,7 +409,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
-             * 
              */
             public NodeNodeId2(Client client, URI baseUri, String nodeid) {
                 _client = client;
@@ -432,12 +420,11 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
              */
             public NodeNodeId2(Client client, URI uri) {
                 _client = client;
                 StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
+                if (template.charAt((template.length() - 1)) != '/') {
                     template.append("/resource/node/{nodeId}");
                 } else {
                     template.append("resource/node/{nodeId}");
@@ -452,7 +439,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Get nodeId
-             * 
              */
             public String getNodeid() {
                 return ((String) _templateAndMatrixParameterValues.get("nodeId"));
@@ -460,7 +446,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Duplicate state and set nodeId
-             * 
              */
             public Localhost_Neo4JXMLRest.Resource.NodeNodeId2 setNodeid(String nodeid) {
                 Map<String, Object> copyMap;
@@ -470,20 +455,20 @@ public class Localhost_Neo4JXMLRest {
                 return new Localhost_Neo4JXMLRest.Resource.NodeNodeId2(_client, copyUriBuilder, copyMap);
             }
 
-            public<T >T optionsAsXml(GenericType<T> returnType) {
+            public <T> T optionsAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T optionsAsXml(Class<T> returnType) {
+            public <T> T optionsAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -491,7 +476,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -518,7 +503,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
-             * 
              */
             public NodeNodeidLabel(Client client, URI baseUri, String nodeid) {
                 _client = client;
@@ -530,12 +514,11 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
              */
             public NodeNodeidLabel(Client client, URI uri) {
                 _client = client;
                 StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
+                if (template.charAt((template.length() - 1)) != '/') {
                     template.append("/resource/node/{nodeid}/label");
                 } else {
                     template.append("resource/node/{nodeid}/label");
@@ -550,7 +533,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Get nodeid
-             * 
              */
             public String getNodeid() {
                 return ((String) _templateAndMatrixParameterValues.get("nodeid"));
@@ -558,7 +540,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Duplicate state and set nodeid
-             * 
              */
             public Localhost_Neo4JXMLRest.Resource.NodeNodeidLabel setNodeid(String nodeid) {
                 Map<String, Object> copyMap;
@@ -568,7 +549,7 @@ public class Localhost_Neo4JXMLRest {
                 return new Localhost_Neo4JXMLRest.Resource.NodeNodeidLabel(_client, copyUriBuilder, copyMap);
             }
 
-            public<T >T postXml(Object input, GenericType<T> returnType) {
+            public <T> T postXml(Object input, GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -576,13 +557,13 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.type("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("POST", ClientResponse.class, input);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T postXml(Object input, Class<T> returnType) {
+            public <T> T postXml(Object input, Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -591,7 +572,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("POST", ClientResponse.class, input);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -609,26 +590,26 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(Labels.class);
             }
 
-            public<T >T getAsXml(GenericType<T> returnType) {
+            public <T> T getAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T getAsXml(Class<T> returnType) {
+            public <T> T getAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -636,7 +617,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -647,20 +628,20 @@ public class Localhost_Neo4JXMLRest {
                 }
             }
 
-            public<T >T optionsAsXml(GenericType<T> returnType) {
+            public <T> T optionsAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T optionsAsXml(Class<T> returnType) {
+            public <T> T optionsAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -668,7 +649,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -695,7 +676,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
-             * 
              */
             public NodeNodeidLabelLabelid(Client client, URI baseUri, String nodeid, String labelid) {
                 _client = client;
@@ -708,12 +688,11 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
              */
             public NodeNodeidLabelLabelid(Client client, URI uri) {
                 _client = client;
                 StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
+                if (template.charAt((template.length() - 1)) != '/') {
                     template.append("/resource/node/{nodeid}/label/{labelid}");
                 } else {
                     template.append("resource/node/{nodeid}/label/{labelid}");
@@ -728,7 +707,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Get nodeid
-             * 
              */
             public String getNodeid() {
                 return ((String) _templateAndMatrixParameterValues.get("nodeid"));
@@ -736,7 +714,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Duplicate state and set nodeid
-             * 
              */
             public Localhost_Neo4JXMLRest.Resource.NodeNodeidLabelLabelid setNodeid(String nodeid) {
                 Map<String, Object> copyMap;
@@ -748,7 +725,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Get labelid
-             * 
              */
             public String getLabelid() {
                 return ((String) _templateAndMatrixParameterValues.get("labelid"));
@@ -756,7 +732,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Duplicate state and set labelid
-             * 
              */
             public Localhost_Neo4JXMLRest.Resource.NodeNodeidLabelLabelid setLabelid(String labelid) {
                 Map<String, Object> copyMap;
@@ -766,20 +741,20 @@ public class Localhost_Neo4JXMLRest {
                 return new Localhost_Neo4JXMLRest.Resource.NodeNodeidLabelLabelid(_client, copyUriBuilder, copyMap);
             }
 
-            public<T >T deleteAsXml(GenericType<T> returnType) {
+            public <T> T deleteAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("DELETE", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T deleteAsXml(Class<T> returnType) {
+            public <T> T deleteAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -787,7 +762,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("DELETE", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -798,20 +773,20 @@ public class Localhost_Neo4JXMLRest {
                 }
             }
 
-            public<T >T optionsAsXml(GenericType<T> returnType) {
+            public <T> T optionsAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T optionsAsXml(Class<T> returnType) {
+            public <T> T optionsAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -819,7 +794,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -846,7 +821,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
-             * 
              */
             public NodeNodeidPaths(Client client, URI baseUri, String nodeid) {
                 _client = client;
@@ -858,12 +832,11 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
              */
             public NodeNodeidPaths(Client client, URI uri) {
                 _client = client;
                 StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
+                if (template.charAt((template.length() - 1)) != '/') {
                     template.append("/resource/node/{nodeid}/paths");
                 } else {
                     template.append("resource/node/{nodeid}/paths");
@@ -878,7 +851,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Get nodeid
-             * 
              */
             public String getNodeid() {
                 return ((String) _templateAndMatrixParameterValues.get("nodeid"));
@@ -886,7 +858,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Duplicate state and set nodeid
-             * 
              */
             public Localhost_Neo4JXMLRest.Resource.NodeNodeidPaths setNodeid(String nodeid) {
                 Map<String, Object> copyMap;
@@ -903,26 +874,26 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(Paths.class);
             }
 
-            public<T >T getAsXml(GenericType<T> returnType) {
+            public <T> T getAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T getAsXml(Class<T> returnType) {
+            public <T> T getAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -930,7 +901,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -945,7 +916,7 @@ public class Localhost_Neo4JXMLRest {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 if (dst == null) {
                 }
-                if (dst!= null) {
+                if (dst != null) {
                     localUriBuilder = localUriBuilder.replaceQueryParam("dst", dst);
                 } else {
                     localUriBuilder = localUriBuilder.replaceQueryParam("dst", ((Object[]) null));
@@ -955,17 +926,17 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(Paths.class);
             }
 
-            public<T >T getAsXml(String dst, GenericType<T> returnType) {
+            public <T> T getAsXml(String dst, GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 if (dst == null) {
                 }
-                if (dst!= null) {
+                if (dst != null) {
                     localUriBuilder = localUriBuilder.replaceQueryParam("dst", dst);
                 } else {
                     localUriBuilder = localUriBuilder.replaceQueryParam("dst", ((Object[]) null));
@@ -975,17 +946,17 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T getAsXml(String dst, Class<T> returnType) {
+            public <T> T getAsXml(String dst, Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 if (dst == null) {
                 }
-                if (dst!= null) {
+                if (dst != null) {
                     localUriBuilder = localUriBuilder.replaceQueryParam("dst", dst);
                 } else {
                     localUriBuilder = localUriBuilder.replaceQueryParam("dst", ((Object[]) null));
@@ -996,7 +967,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -1007,20 +978,20 @@ public class Localhost_Neo4JXMLRest {
                 }
             }
 
-            public<T >T optionsAsXml(GenericType<T> returnType) {
+            public <T> T optionsAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T optionsAsXml(Class<T> returnType) {
+            public <T> T optionsAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -1028,7 +999,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -1055,7 +1026,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
-             * 
              */
             public NodeNodeidRelationship(Client client, URI baseUri, String nodeid) {
                 _client = client;
@@ -1067,12 +1037,11 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
              */
             public NodeNodeidRelationship(Client client, URI uri) {
                 _client = client;
                 StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
+                if (template.charAt((template.length() - 1)) != '/') {
                     template.append("/resource/node/{nodeid}/relationship");
                 } else {
                     template.append("resource/node/{nodeid}/relationship");
@@ -1087,7 +1056,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Get nodeid
-             * 
              */
             public String getNodeid() {
                 return ((String) _templateAndMatrixParameterValues.get("nodeid"));
@@ -1095,7 +1063,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Duplicate state and set nodeid
-             * 
              */
             public Localhost_Neo4JXMLRest.Resource.NodeNodeidRelationship setNodeid(String nodeid) {
                 Map<String, Object> copyMap;
@@ -1113,13 +1080,13 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.type("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("POST", ClientResponse.class, input);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(it.polito.dp2.NFFG.sol2.generated_from_wadl.Relationship.class);
             }
 
-            public<T >T postXml(Object input, GenericType<T> returnType) {
+            public <T> T postXml(Object input, GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -1127,13 +1094,13 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.type("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("POST", ClientResponse.class, input);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T postXml(Object input, Class<T> returnType) {
+            public <T> T postXml(Object input, Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -1142,7 +1109,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("POST", ClientResponse.class, input);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -1169,7 +1136,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
-             * 
              */
             public Nodes(Client client, URI baseUri) {
                 _client = client;
@@ -1178,20 +1144,20 @@ public class Localhost_Neo4JXMLRest {
                 _templateAndMatrixParameterValues = new HashMap<String, Object>();
             }
 
-            public<T >T deleteAsXml(GenericType<T> returnType) {
+            public <T> T deleteAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("DELETE", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T deleteAsXml(Class<T> returnType) {
+            public <T> T deleteAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -1199,7 +1165,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("DELETE", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -1217,26 +1183,26 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(it.polito.dp2.NFFG.sol2.generated_from_wadl.Nodes.class);
             }
 
-            public<T >T getAsXml(GenericType<T> returnType) {
+            public <T> T getAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T getAsXml(Class<T> returnType) {
+            public <T> T getAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -1244,7 +1210,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -1271,7 +1237,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
-             * 
              */
             public Relationship(Client client, URI baseUri) {
                 _client = client;
@@ -1280,20 +1245,20 @@ public class Localhost_Neo4JXMLRest {
                 _templateAndMatrixParameterValues = new HashMap<String, Object>();
             }
 
-            public<T >T optionsAsXml(GenericType<T> returnType) {
+            public <T> T optionsAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T optionsAsXml(Class<T> returnType) {
+            public <T> T optionsAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -1301,7 +1266,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -1328,7 +1293,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
-             * 
              */
             public RelationshipRelationshipid(Client client, URI baseUri, String relationshipid) {
                 _client = client;
@@ -1340,12 +1304,11 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
              */
             public RelationshipRelationshipid(Client client, URI uri) {
                 _client = client;
                 StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
+                if (template.charAt((template.length() - 1)) != '/') {
                     template.append("/resource/relationship/{relationshipid}");
                 } else {
                     template.append("resource/relationship/{relationshipid}");
@@ -1360,7 +1323,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Get relationshipid
-             * 
              */
             public String getRelationshipid() {
                 return ((String) _templateAndMatrixParameterValues.get("relationshipid"));
@@ -1368,7 +1330,6 @@ public class Localhost_Neo4JXMLRest {
 
             /**
              * Duplicate state and set relationshipid
-             * 
              */
             public Localhost_Neo4JXMLRest.Resource.RelationshipRelationshipid setRelationshipid(String relationshipid) {
                 Map<String, Object> copyMap;
@@ -1385,26 +1346,26 @@ public class Localhost_Neo4JXMLRest {
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(it.polito.dp2.NFFG.sol2.generated_from_wadl.Relationship.class);
             }
 
-            public<T >T getAsXml(GenericType<T> returnType) {
+            public <T> T getAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T getAsXml(Class<T> returnType) {
+            public <T> T getAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -1412,7 +1373,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("GET", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -1423,20 +1384,20 @@ public class Localhost_Neo4JXMLRest {
                 }
             }
 
-            public<T >T deleteAsXml(GenericType<T> returnType) {
+            public <T> T deleteAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("DELETE", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T deleteAsXml(Class<T> returnType) {
+            public <T> T deleteAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -1444,7 +1405,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("DELETE", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -1455,20 +1416,20 @@ public class Localhost_Neo4JXMLRest {
                 }
             }
 
-            public<T >T optionsAsXml(GenericType<T> returnType) {
+            public <T> T optionsAsXml(GenericType<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
                 resourceBuilder = resourceBuilder.accept("application/xml");
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
-                if (response.getStatus()>= 400) {
+                if (response.getStatus() >= 400) {
                     throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                 }
                 return response.getEntity(returnType);
             }
 
-            public<T >T optionsAsXml(Class<T> returnType) {
+            public <T> T optionsAsXml(Class<T> returnType) {
                 UriBuilder localUriBuilder = _uriBuilder.clone();
                 WebResource resource = _client.resource(localUriBuilder.buildFromMap(_templateAndMatrixParameterValues));
                 com.sun.jersey.api.client.WebResource.Builder resourceBuilder = resource.getRequestBuilder();
@@ -1476,7 +1437,7 @@ public class Localhost_Neo4JXMLRest {
                 ClientResponse response;
                 response = resourceBuilder.method("OPTIONS", ClientResponse.class);
                 if (!ClientResponse.class.isAssignableFrom(returnType)) {
-                    if (response.getStatus()>= 400) {
+                    if (response.getStatus() >= 400) {
                         throw new Localhost_Neo4JXMLRest.WebApplicationExceptionMessage(Response.status(response.getClientResponseStatus()).build());
                     }
                 }
@@ -1494,11 +1455,9 @@ public class Localhost_Neo4JXMLRest {
 
     /**
      * Workaround for JAX_RS_SPEC-312
-     * 
      */
     private static class WebApplicationExceptionMessage
-        extends WebApplicationException
-    {
+            extends WebApplicationException {
 
 
         private WebApplicationExceptionMessage(Response response) {
@@ -1507,13 +1466,12 @@ public class Localhost_Neo4JXMLRest {
 
         /**
          * Workaround for JAX_RS_SPEC-312
-         * 
          */
         public String getMessage() {
             Response response = getResponse();
             Response.Status status = Response.Status.fromStatusCode(response.getStatus());
-            if (status!= null) {
-                return (response.getStatus()+(" "+ status.getReasonPhrase()));
+            if (status != null) {
+                return (response.getStatus() + (" " + status.getReasonPhrase()));
             } else {
                 return Integer.toString(response.getStatus());
             }
@@ -1522,7 +1480,7 @@ public class Localhost_Neo4JXMLRest {
         public String toString() {
             String s = "javax.ws.rs.WebApplicationException";
             String message = getLocalizedMessage();
-            return (s +(": "+ message));
+            return (s + (": " + message));
         }
 
     }

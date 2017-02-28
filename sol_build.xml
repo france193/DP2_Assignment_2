@@ -2,39 +2,39 @@
 
 <project name="NFFG-SOL2" default="generate-artifacts" basedir=".">
 
-	<description>
-		My Script for NFFG Assignment 2 solution
-	</description>
+    <description>
+        My Script for NFFG Assignment 2 solution
+    </description>
 
-	<property name="generated_wadl"
-		location="${basedir}/src/it/polito/dp2/NFFG/sol2/generated_from_wadl/" />
+    <property name="generated_wadl"
+              location="${basedir}/src/it/polito/dp2/NFFG/sol2/generated_from_wadl/"/>
 
-	<!-- use a task of the library "org.jvnet.ws.wadl2java.WJCTask" creating 
-		a new task type named "wjc" -->
-	<taskdef name="wjc" classname="org.jvnet.ws.wadl2java.WJCTask">
-		<classpath>
-			<!-- where can be find the library and the .jar file -->
-			<fileset dir="${lib.dir}" includes="*.jar" />
-		</classpath>
-	</taskdef>
+    <!-- use a task of the library "org.jvnet.ws.wadl2java.WJCTask" creating
+        a new task type named "wjc" -->
+    <taskdef name="wjc" classname="org.jvnet.ws.wadl2java.WJCTask">
+        <classpath>
+            <!-- where can be find the library and the .jar file -->
+            <fileset dir="${lib.dir}" includes="*.jar"/>
+        </classpath>
+    </taskdef>
 
-	<target name="clean">
-		<delete dir="${generated_wadl}" />
-	</target>
+    <target name="clean">
+        <delete dir="${generated_wadl}"/>
+    </target>
 
-	<target name="init" depends="clean">
-		<mkdir dir="${generated_wadl}" />
-	</target>
-	
-	<target name="generate-artifacts" depends="init">
-		<echo message=" > Generating annotated classes from the wadl of Neo4jXML..." />
-		<wjc description="${WADL}" package="it.polito.dp2.NFFG.sol2.generated_from_wadl"
-			autoSchemaPackage="false" target="${src.dir}">
-			<customizations dir="." includes="binding.xjc" />
-			<produces dir="${src.dir}/it/polito/dp2/NFFG/sol2/generated_from_wadl/" includes="*.java" />
-			<depends dir="." includes="build.xml" />
-		</wjc>
-		<echo message=" > Done" />
-	</target>
+    <target name="init" depends="clean">
+        <mkdir dir="${generated_wadl}"/>
+    </target>
+
+    <target name="generate-artifacts" depends="init">
+        <echo message=" > Generating annotated classes from the wadl of Neo4jXML..."/>
+        <wjc description="${WADL}" package="it.polito.dp2.NFFG.sol2.generated_from_wadl"
+             autoSchemaPackage="false" target="${src.dir}">
+            <customizations dir="." includes="binding.xjc"/>
+            <produces dir="${src.dir}/it/polito/dp2/NFFG/sol2/generated_from_wadl/" includes="*.java"/>
+            <depends dir="." includes="build.xml"/>
+        </wjc>
+        <echo message=" > Done"/>
+    </target>
 
 </project>
